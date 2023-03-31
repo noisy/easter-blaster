@@ -100,10 +100,6 @@ function explodeBomb(x, y) {
     // Remove explosion and blast after a short duration
     setTimeout(() => {
         bomb.classList.remove('explosion');
-        blastCells.forEach((blastCell) => {
-            blastCell.classList.remove('blast');
-        });
-
         // Check if a Bomberman is hit by the blast
         if (isCellInBlast(bombermanPosition.x, bombermanPosition.y)) {
             bombermanLives--;
@@ -115,6 +111,11 @@ function explodeBomb(x, y) {
             updateLives();
             respawnBomberman(2);
         }
+
+        blastCells.forEach((blastCell) => {
+            blastCell.classList.remove('blast');
+        });
+
     }, 500);
 
 }
