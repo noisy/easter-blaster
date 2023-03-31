@@ -49,7 +49,8 @@ main {
 /* Game elements */
 .bomberman {
     background-color: blue;
-    /* background-image: url("images/chicken_1.png"); */
+    background-size: 32px 32px;
+    background-image: url("images/chicken_1.png");
 }
 
 .wall {
@@ -86,6 +87,8 @@ main {
 
 .bomberman2 {
     background-color: red;
+    background-size: 32px 32px;
+    background-image: url("images/chicken_2.png");
 }
 
 .life-counter {

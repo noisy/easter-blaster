@@ -9,18 +9,22 @@ const NUMBER_OF_LIVES = 2;
 // Life counters
 let bombermanLives = NUMBER_OF_LIVES;
 let bomberman2Lives = NUMBER_OF_LIVES;
+let walls = [];
 updateLives()
+createGrid();
+generateWalls();
 
 // Create grid
 function createGrid() {
-    for (let i = 0; i < gridSize.rows * gridSize.columns; i++) {
-        const cell = document.createElement('div');
-        grid.appendChild(cell);
+    for (let y = 0; y < gridSize.rows; y++) {
+        for (let x = 0; x < gridSize.columns; x++) {
+            const cell = document.createElement('div');
+            cell.setAttribute('data-x', x);
+            cell.setAttribute('data-y', y);
+            grid.appendChild(cell);
+        }
     }
 }
-
-createGrid();
-
 // Helper functions
 function getCell(x, y) {
     return grid.children[y * gridSize.columns + x];
@@ -38,6 +42,10 @@ function isCellInBlast(x, y) {
 }
 
 function updateBombermanPosition(x, y) {
+    if (getForbiddenPositions().some(pos => pos.x === x && pos.y === y)) {
+        return;
+    }
+
     getCell(bombermanPosition.x, bombermanPosition.y).classList.remove('bomberman');
     getCell(x, y).classList.add('bomberman');
     bombermanPosition = { x, y };
@@ -212,6 +220,10 @@ window.addEventListener('keydown', (event) => {
 
 // Update the updateBombermanPosition function to handle the second player
 function updateBombermanPosition2(x, y) {
+    if (getForbiddenPositions().some(pos => pos.x === x && pos.y === y)) {
+        return;
+    }
+
     getCell(bomberman2Position.x, bomberman2Position.y).classList.remove('bomberman2');
     getCell(x, y).classList.add('bomberman2');
     bomberman2Position = { x, y };
@@ -233,13 +245,12 @@ function respawnBomberman(player) {
 
     // Place Bomberman at a random position after a delay
     setTimeout(() => {
-        let forbiddenPositions = []; // Replace with the function returning the list of forbidden positions
 
         let x, y;
         do {
             x = Math.floor(Math.random() * gridSize.columns);
             y = Math.floor(Math.random() * gridSize.rows);
-        } while (forbiddenPositions.some(pos => pos.x === x && pos.y === y));
+        } while (getForbiddenPositions().some(pos => pos.x === x && pos.y === y));
 
         if (player === 1) {
             updateBombermanPosition(x, y);
@@ -257,3 +268,55 @@ function endGame(winner) {
     message.textContent = `Player ${winner} wins!`;
     overlay.classList.add('visible');
 }
+
+function getForbiddenPositions() {
+    return [...walls, ...getBombsPositions(), ...getPlayersPositions()];
+}
+
+function getBombsPositions() {
+    const bombs = [];
+    const cells = grid.querySelectorAll('.bomb');
+
+    cells.forEach((cell) => {
+        const x = parseInt(cell.getAttribute('data-x'), 10);
+        const y = parseInt(cell.getAttribute('data-y'), 10);
+        bombs.push({ x, y });
+    });
+
+    return bombs;
+}
+
+function getPlayersPositions() {
+    return [{ x: bombermanPosition.x, y: bombermanPosition.y }, { x: bomberman2Position.x, y: bomberman2Position.y }];
+}
+
+function generateWalls() {
+    // Remove existing wall classes from cells
+    const existingWalls = grid.querySelectorAll('.wall');
+    walls = [];
+    existingWalls.forEach((cell) => {
+        cell.classList.remove('wall');
+    });
+
+    const totalCells = gridSize.rows * gridSize.columns;
+    const maxWalls = Math.floor(totalCells * 0.4);
+
+    while (walls.length < maxWalls) {
+        const x = Math.floor(Math.random() * gridSize.columns);
+        const y = Math.floor(Math.random() * gridSize.rows);
+
+        // Check if the cell is not already in the walls array
+        if (!walls.some((wall) => wall.x === x && wall.y === y)) {
+            walls.push({ x, y });
+
+            // Add .wall class to the cell
+            const cell = getCell(x, y);
+            cell.classList.add('wall');
+        }
+    }
+}
+
+
+document.getElementById('generate-new-board').addEventListener('click', () => {
+    generateWalls();
+});
