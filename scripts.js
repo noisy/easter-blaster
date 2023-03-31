@@ -13,6 +13,7 @@ let walls = [];
 updateLives()
 createGrid();
 generateWalls();
+initBombermans();
 
 // Create grid
 function createGrid() {
@@ -51,23 +52,28 @@ function updateBombermanPosition(x, y) {
     bombermanPosition = { x, y };
 }
 
-// Initialize Bomberman
-updateBombermanPosition(1, 1);
-updateBombermanPosition2(gridSize.columns - 2, gridSize.rows - 2);
+function findRandomPosition(forbiddenPositions) {
+    let x, y;
 
+    do {
+        x = Math.floor(Math.random() * gridSize.columns);
+        y = Math.floor(Math.random() * gridSize.rows);
+    } while (forbiddenPositions.some(pos => pos.x === x && pos.y === y));
 
-// // Bomb explosion
-// function explodeBomb(x, y) {
-//   const bomb = getCell(x, y);
-//   bomb.classList.remove('bomb');
-//   bomb.classList.add('explosion');
+    return { x, y };
+}
 
-//   // Remove explosion after a short duration
-//   setTimeout(() => {
-//     bomb.classList.remove('explosion');
-//   }, 500);
-// }
+function initBombermans() {
+    const forbiddenPositions = getForbiddenPositions();
 
+    // Find valid random positions for both Bombermans
+    const pos1 = findRandomPosition(forbiddenPositions);
+    const pos2 = findRandomPosition([...forbiddenPositions, pos1]);
+
+    // Initialize Bombermans
+    updateBombermanPosition(pos1.x, pos1.y);
+    updateBombermanPosition2(pos2.x, pos2.y);
+}
 
 // Bomb explosion
 function explodeBomb(x, y) {
