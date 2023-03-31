@@ -4,7 +4,7 @@ const gridSize = { rows: 11, columns: 13 };
 let bombermanPosition = { x: 1, y: 1 };
 let bomberman2Position = { x: gridSize.columns - 2, y: gridSize.rows - 2 };
 
-
+const INTRO_DURATION = 3000;
 const NUMBER_OF_LIVES = 10;
 const BLAST_DURATION = 500;
 const BOMB_TIMER = 2000;
@@ -89,10 +89,9 @@ function initBombermans() {
 
     // Find valid random positions for both Bombermans
     const pos1 = findRandomPosition(forbiddenPositions);
-    const pos2 = findRandomPosition([...forbiddenPositions, pos1]);
-
-    // Initialize Bombermans
     updateBombermanPosition(pos1.x, pos1.y);
+
+    const pos2 = findRandomPosition([...forbiddenPositions, pos1]);
     updateBombermanPosition2(pos2.x, pos2.y);
 }
 
@@ -395,8 +394,12 @@ function generateDestructibleItems() {
 }
 
 document.getElementById('generate-new-board').addEventListener('click', () => {
-    generateWalls();
-    generateDestructibleItems();
+    showModal();
+    setTimeout(() => {
+        generateWalls();
+        generateDestructibleItems();
+    }, 1000);
+
 });
 
 
@@ -432,3 +435,21 @@ pieSocket.subscribe("best-room")
             }
         });
     });
+
+
+function showModal() {
+    const modal = document.getElementById('fullscreen-modal');
+    modal.classList.remove('hidden');
+
+    setTimeout(() => {
+        hideModal();
+    }, INTRO_DURATION);
+}
+
+function hideModal() {
+    const modal = document.getElementById('fullscreen-modal');
+    modal.classList.add('hidden');
+}
+
+// Show the modal on page load
+showModal();
