@@ -46,8 +46,8 @@ main {
 
 }
 
-.life-counter .bomberman,
-.life-counter .bomberman2 {
+.life-counter .player_1,
+.life-counter .player_2 {
     width: 64px;
     height: 64px;
 }
@@ -72,6 +72,16 @@ main {
     background-image: url("images/chicken_2.png") !important;
 }
 
+.player_1 {
+    background-size: 64px 64px;
+    background-image: url("images/player_1.png") !important;
+}
+
+.player_2 {
+    background-size: 64px 64px;
+    background-image: url("images/player_2.png") !important;
+}
+
 .wall {
     background-color: #333;
     background-size: 64px 64px;
@@ -91,7 +101,7 @@ main {
 }
 
 .dead {
-    opacity: 0.5;
+    opacity: 0.3;
 }
 
 .bomberman.explosion,
