@@ -6,10 +6,10 @@ let bomberman2Position = { x: gridSize.columns - 2, y: gridSize.rows - 2 };
 
 
 const NUMBER_OF_LIVES = 2;
-// Life counters
 let bombermanLives = NUMBER_OF_LIVES;
 let bomberman2Lives = NUMBER_OF_LIVES;
 let walls = [];
+
 updateLives()
 createGrid();
 generateWalls();
@@ -81,19 +81,11 @@ function explodeBomb(x, y) {
     bomb.classList.remove('bomb');
     bomb.classList.add('explosion');
 
-    // Create blast effect
-    const blastDirections = [
-        { x: 1, y: 0 },
-        { x: -1, y: 0 },
-        { x: 0, y: 1 },
-        { x: 0, y: -1 },
-    ];
-
     const blastCells = generateBlastCells(x, y);
 
     // Remove explosion and blast after a short duration
     setTimeout(() => {
-        bomb.classList.remove('explosion');
+
         // Check if a Bomberman is hit by the blast
         if (isCellInBlast(bombermanPosition.x, bombermanPosition.y)) {
             bombermanLives--;
@@ -105,7 +97,7 @@ function explodeBomb(x, y) {
             updateLives();
             respawnBomberman(2);
         }
-
+        bomb.classList.remove('explosion');
         blastCells.forEach((blastCell) => {
             blastCell.classList.remove('blast');
         });
