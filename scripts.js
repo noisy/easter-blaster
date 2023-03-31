@@ -8,13 +8,17 @@ let bomberman2Position = { x: gridSize.columns - 2, y: gridSize.rows - 2 };
 const NUMBER_OF_LIVES = 2;
 const BLAST_DURATION = 500;
 const BOMB_TIMER = 2000;
+const WALLS_PERCENTAGE = 0.1;
+const DESTRUCTIBLE_ITEMS_PERCENTAGE = 0.3;
+
+let walls = [];
 let bombermanLives = NUMBER_OF_LIVES;
 let bomberman2Lives = NUMBER_OF_LIVES;
-let walls = [];
 
 updateLives()
 createGrid();
 generateWalls();
+generateDestructibleItems();
 initBombermans();
 
 // Create grid
@@ -132,13 +136,17 @@ function generateBlastCells(x, y) {
             ) {
                 const blastCell = getCell(blastX, blastY);
 
-                // Check if the cell has a wall
                 if (blastCell.classList.contains('wall')) {
                     break;
+                } else if (blastCell.classList.contains('destructible')) {
+                    blastCell.classList.remove('destructible');
+                    blastCell.classList.add('blast');
+                    blastCells.push(blastCell);
+                    break;
+                } else {
+                    blastCell.classList.add('blast');
+                    blastCells.push(blastCell);
                 }
-
-                blastCell.classList.add('blast');
-                blastCells.push(blastCell);
             }
         }
     }
@@ -284,7 +292,7 @@ function endGame(winner) {
 }
 
 function getForbiddenPositions() {
-    return [...walls, ...getBombsPositions(), ...getPlayersPositions()];
+    return [...walls, ...getBombsPositions(), ...getPlayersPositions(), ...getDestructiblesPositions()];
 }
 
 function getBombsPositions() {
@@ -304,6 +312,22 @@ function getPlayersPositions() {
     return [{ x: bombermanPosition.x, y: bombermanPosition.y }, { x: bomberman2Position.x, y: bomberman2Position.y }];
 }
 
+
+function getDestructiblesPositions() {
+    const positions = [];
+    const cells = grid.querySelectorAll('.destructible');
+
+    cells.forEach((cell) => {
+        const x = parseInt(cell.getAttribute('data-x'), 10);
+        const y = parseInt(cell.getAttribute('data-y'), 10);
+        positions.push({ x, y });
+    });
+
+    return positions;
+}
+
+
+
 function generateWalls() {
     // Remove existing wall classes from cells
     const existingWalls = grid.querySelectorAll('.wall');
@@ -313,7 +337,7 @@ function generateWalls() {
     });
 
     const totalCells = gridSize.rows * gridSize.columns;
-    const maxWalls = Math.floor(totalCells * 0.1);
+    const maxWalls = Math.floor(totalCells * WALLS_PERCENTAGE);
 
     while (walls.length < maxWalls) {
         const x = Math.floor(Math.random() * gridSize.columns);
@@ -330,6 +354,22 @@ function generateWalls() {
     }
 }
 
+function generateDestructibleItems() {
+    const totalCells = gridSize.rows * gridSize.columns;
+    const maxDestructibleItems = Math.floor(totalCells * DESTRUCTIBLE_ITEMS_PERCENTAGE);
+
+    let placedItems = 0;
+    while (placedItems < maxDestructibleItems) {
+        const x = Math.floor(Math.random() * gridSize.columns);
+        const y = Math.floor(Math.random() * gridSize.rows);
+
+        const cell = getCell(x, y);
+        if (!cell.classList.contains('wall') && !cell.classList.contains('destructible')) {
+            cell.classList.add('destructible');
+            placedItems++;
+        }
+    }
+}
 
 document.getElementById('generate-new-board').addEventListener('click', () => {
     generateWalls();
