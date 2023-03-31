@@ -10,6 +10,7 @@ const BLAST_DURATION = 500;
 const BOMB_TIMER = 2000;
 const WALLS_PERCENTAGE = 0.1;
 const DESTRUCTIBLE_ITEMS_PERCENTAGE = 0.3;
+const directions = ['up', 'down', 'left', 'right']
 
 let walls = [];
 let bombermanLives = NUMBER_OF_LIVES;
@@ -399,7 +400,7 @@ var pieSocket = new PieSocket({
     notifySelf: true
 });
 
-const directions = ['up', 'down', 'left', 'right']
+
 
 pieSocket.subscribe("best-room")
     .then((channel) => {
