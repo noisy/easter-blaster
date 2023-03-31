@@ -17,25 +17,29 @@
         <h1>Easter Blaster</h1>
     </div>
     <button id="generate-new-board">Generate New Board</button>
-    <main>
-        <section class="game-container">
-            <div class="grid">
-                <!-- Game grid will be generated here -->
-            </div>
-            <div class="status">
-                <div class="life-counter">
-                    <span class="value" id="bomberman-lives"></span>
+    <div id="main-wrapper">
+        <img src="images/qr1.png" class="qr1" />
+        <main>
+            <section class="game-container">
+                <div class="grid">
+                    <!-- Game grid will be generated here -->
                 </div>
-                <div class="life-counter">
-                    <span class="value" id="bomberman2-lives"></span>
+                <div class="status">
+                    <div class="life-counter">
+                        <span class="value" id="bomberman-lives"></span>
+                    </div>
+                    <div class="life-counter">
+                        <span class="value" id="bomberman2-lives"></span>
+                    </div>
                 </div>
-            </div>
-            <div class="game-ended-overlay">
-                <div class="winner-message"></div><br>
-                <button id="try-again">Try again</button>
-            </div>
-        </section>
-    </main>
+                <div class="game-ended-overlay">
+                    <div class="winner-message"></div><br>
+                    <button id="try-again">Try again</button>
+                </div>
+            </section>
+        </main>
+        <img src="images/qr2.png" class="qr2" />
+    </div>
     <script src="https://unpkg.com/piesocket-js@4"></script>
     <script src="scripts.js"></script>
 </body>

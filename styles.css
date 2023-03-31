@@ -23,6 +23,19 @@ main {
     align-items: center;
 }
 
+.qr1, .qr2 {
+    margin: 100px;
+    margin-top: 250px;
+    width: 200px;
+    height: 200px;
+    margin-bottom: 20px;
+}
+
+#main-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
 /* Game container */
 .game-container {
     display: flex;
