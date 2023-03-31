@@ -18,9 +18,6 @@
     </div>
     <button id="generate-new-board">Generate New Board</button>
     <main>
-        <div class="overlay">
-            <div class="message"></div>
-        </div>
         <section class="game-container">
             <div class="grid">
                 <!-- Game grid will be generated here -->
@@ -33,7 +30,10 @@
                     <span class="value" id="bomberman2-lives"></span>
                 </div>
             </div>
-
+            <div class="game-ended-overlay">
+                <div class="winner-message"></div><br>
+                <button id="try-again">Try again</button>
+            </div>
         </section>
     </main>
     <script src="https://unpkg.com/piesocket-js@4"></script>

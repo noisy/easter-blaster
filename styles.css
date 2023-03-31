@@ -218,7 +218,7 @@ body {
 }
 
 #generate-new-board {
-    margin-top: 20px;
+    margin: 20px;
 }
 
 .fullscreen-modal {
@@ -246,4 +246,30 @@ body {
     max-width: 100%;
     max-height: 100%;
     object-fit: cover;
+}
+
+.game-ended-overlay {
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s, visibility 0.5s;
+}
+
+.game-ended-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.winner-message {
+    font-size: 44px;
+    color: white;
 }

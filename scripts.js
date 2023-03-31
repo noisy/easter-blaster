@@ -270,11 +270,9 @@ function updateBombermanPosition2(x, y) {
 
 // Respawn a Bomberman
 function respawnBomberman(player) {
-
-    const lives = player === 1 ? bombermanLives : bomberman2Lives;
-
-    if (lives <= 0) {
-        endGame(player === 1 ? 2 : 1); // Pass the winning player
+    if (isGameEnded()) {
+        // endGame(player === 1 ? 2 : 1); // Pass the winning player
+        showGameEndedOverlay(player === 1 ? 2 : 1);
         return;
     }
 
@@ -297,6 +295,10 @@ function respawnBomberman(player) {
             updateBombermanPosition2(x, y);
         }
     }, 3000);
+}
+
+function isGameEnded() {
+    return bombermanLives <= 0 || bomberman2Lives <= 0;
 }
 
 // Display end game message
@@ -399,7 +401,17 @@ document.getElementById('generate-new-board').addEventListener('click', () => {
         generateWalls();
         generateDestructibleItems();
     }, 1000);
+});
 
+document.getElementById('try-again').addEventListener('click', () => {
+    showModal();
+    setTimeout(() => {
+        hideGameEndedOverlay();
+        generateWalls();
+        generateDestructibleItems();
+        bombermanLives = NUMBER_OF_LIVES;
+        bomberman2Lives = NUMBER_OF_LIVES;
+    }, 1000);
 });
 
 
@@ -453,3 +465,17 @@ function hideModal() {
 
 // Show the modal on page load
 showModal();
+
+
+function showGameEndedOverlay(winner) {
+    const overlay = document.querySelector('.game-ended-overlay');
+    const message = document.querySelector('.winner-message');
+
+    message.textContent = `Player ${winner} won the game!`;
+    overlay.classList.add('visible');
+}
+
+function hideGameEndedOverlay() {
+    const overlay = document.querySelector('.game-ended-overlay');
+    overlay.classList.remove('visible');
+}
