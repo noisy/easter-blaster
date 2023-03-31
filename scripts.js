@@ -6,6 +6,8 @@ let bomberman2Position = { x: gridSize.columns - 2, y: gridSize.rows - 2 };
 
 
 const NUMBER_OF_LIVES = 2;
+const BLAST_DURATION = 500;
+const BOMB_TIMER = 2000;
 let bombermanLives = NUMBER_OF_LIVES;
 let bomberman2Lives = NUMBER_OF_LIVES;
 let walls = [];
@@ -102,7 +104,7 @@ function explodeBomb(x, y) {
             blastCell.classList.remove('blast');
         });
 
-    }, 500);
+    }, BLAST_DURATION);
 
 }
 
@@ -177,7 +179,7 @@ window.addEventListener('keydown', (event) => {
             // Explode bomb after a short duration
             setTimeout(() => {
                 explodeBomb(bombX, bombY);
-            }, 2000);
+            }, BOMB_TIMER);
             break;
         default:
             break;

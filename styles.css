@@ -75,6 +75,13 @@ main {
     background-image: url("images/egg_1.png") !important;
 }
 
+.bomberman.explosion,
+.bomberman.blast,
+.bomberman2.explosion,
+.bomberman2.blast {
+    background-image: url("images/chicken_hit.png") !important;
+}
+
 /* Controls */
 .controls {
     display: flex;
@@ -101,4 +108,74 @@ main {
     font-family: Arial, sans-serif;
     font-size: 14px;
     margin-bottom: 5px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #FFFAF0;
+    background-image: url("https://www.transparenttextures.com/patterns/egg-shell.png");
+    color: #6B8E23;
+}
+
+h1 {
+    font-size: 3rem;
+    text-align: center;
+    margin: 20px 0;
+    color: #FFA07A;
+    text-shadow: 2px 2px 0 #B22222;
+}
+
+.status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    font-size: 1.5rem;
+    border: 3px solid #B22222;
+    border-radius: 8px;
+    background-color: #FFFACD;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button {
+    font-size: 1.2rem;
+    padding: 8px 16px;
+    background-color: #FFA07A;
+    border: none;
+    border-radius: 5px;
+    color: #FFF;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #FF7F50;
+}
+
+button:active {
+    background-color: #FF6347;
+}
+
+.message {
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 20px 0;
+    color: #B22222;
+    text-shadow: 1px 1px 0 #FFA07A;
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.header-wrapper {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: #FFFAF0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
