@@ -94,6 +94,14 @@ main {
     background-image: url("images/egg_1.png") !important;
 }
 
+.bomberman.bomb {
+    background-image: url("images/egg_planted.png") !important;
+}
+
+.bomberman2.bomb {
+    background-image: url("images/egg_planted2.png") !important;
+}
+
 .destructible {
     background-color: #ff69b4;
     background-size: 64px 64px;

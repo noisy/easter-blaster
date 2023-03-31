@@ -168,91 +168,94 @@ function generateBlastCells(x, y) {
     return blastCells;
 }
 
-// Keydown event listener
 window.addEventListener('keydown', (event) => {
     switch (event.key) {
+
+        // player 1
         case 'ArrowUp':
-            if (bombermanPosition.y > 0) {
-                updateBombermanPosition(bombermanPosition.x, bombermanPosition.y - 1);
-            }
+            moveBomberman(bombermanPosition, 'up', updateBombermanPosition);
             break;
         case 'ArrowDown':
-            if (bombermanPosition.y < gridSize.rows - 1) {
-                updateBombermanPosition(bombermanPosition.x, bombermanPosition.y + 1);
-            }
+            moveBomberman(bombermanPosition, 'down', updateBombermanPosition);
             break;
         case 'ArrowLeft':
-            if (bombermanPosition.x > 0) {
-                updateBombermanPosition(bombermanPosition.x - 1, bombermanPosition.y);
-            }
+            moveBomberman(bombermanPosition, 'left', updateBombermanPosition);
             break;
         case 'ArrowRight':
-            if (bombermanPosition.x < gridSize.columns - 1) {
-                updateBombermanPosition(bombermanPosition.x + 1, bombermanPosition.y);
-            }
+            moveBomberman(bombermanPosition, 'right', updateBombermanPosition);
             break;
         case ' ':
         case 'Spacebar': // For older browsers
-            const bombX = bombermanPosition.x;
-            const bombY = bombermanPosition.y;
-            const bomb = getCell(bombX, bombY);
-            bomb.classList.add('bomb');
-
-            // Explode bomb after a short duration
-            setTimeout(() => {
-                explodeBomb(bombX, bombY);
-            }, BOMB_TIMER);
+            placeBomb(bombermanPosition.x, bombermanPosition.y);
             break;
-        default:
-            break;
-    }
-});
 
-window.addEventListener('keydown', (event) => {
-    switch (event.key) {
-        // ... (keep the existing cases for Bomberman 1)
-
-        // Controls for Bomberman 2
+        // player 2
         case 'w':
         case 'W':
-            if (bomberman2Position.y > 0) {
-                updateBombermanPosition2(bomberman2Position.x, bomberman2Position.y - 1);
-            }
+            moveBomberman(bomberman2Position, 'up', updateBombermanPosition2);
             break;
         case 's':
         case 'S':
-            if (bomberman2Position.y < gridSize.rows - 1) {
-                updateBombermanPosition2(bomberman2Position.x, bomberman2Position.y + 1);
-            }
+            moveBomberman(bomberman2Position, 'down', updateBombermanPosition2);
             break;
         case 'a':
         case 'A':
-            if (bomberman2Position.x > 0) {
-                updateBombermanPosition2(bomberman2Position.x - 1, bomberman2Position.y);
-            }
+            moveBomberman(bomberman2Position, 'left', updateBombermanPosition2);
             break;
         case 'd':
         case 'D':
-            if (bomberman2Position.x < gridSize.columns - 1) {
-                updateBombermanPosition2(bomberman2Position.x + 1, bomberman2Position.y);
-            }
+            moveBomberman(bomberman2Position, 'right', updateBombermanPosition2);
             break;
         case 'z':
         case 'Z':
-            const bomb2X = bomberman2Position.x;
-            const bomb2Y = bomberman2Position.y;
-            const bomb2 = getCell(bomb2X, bomb2Y);
-            bomb2.classList.add('bomb');
+            placeBomb(bomberman2Position.x, bomberman2Position.y);
 
-            // Explode bomb after a short duration
-            setTimeout(() => {
-                explodeBomb(bomb2X, bomb2Y);
-            }, 2000);
-            break;
         default:
             break;
     }
 });
+
+function moveBomberman(bombermanPosition, direction, updatePosition) {
+    let newX = bombermanPosition.x;
+    let newY = bombermanPosition.y;
+
+    switch (direction) {
+        case 'up':
+            if (newY > 0) {
+                newY -= 1;
+            }
+            break;
+        case 'down':
+            if (newY < gridSize.rows - 1) {
+                newY += 1;
+            }
+            break;
+        case 'left':
+            if (newX > 0) {
+                newX -= 1;
+            }
+            break;
+        case 'right':
+            if (newX < gridSize.columns - 1) {
+                newX += 1;
+            }
+            break;
+        default:
+            return;
+    }
+
+    updatePosition(newX, newY);
+}
+
+function placeBomb(x, y) {
+    const bomb = getCell(x, y);
+    bomb.classList.add('bomb');
+
+    // Explode bomb after a short duration
+    setTimeout(() => {
+        explodeBomb(x, y);
+    }, BOMB_TIMER);
+}
 
 // Update the updateBombermanPosition function to handle the second player
 function updateBombermanPosition2(x, y) {
@@ -388,3 +391,37 @@ function generateDestructibleItems() {
 document.getElementById('generate-new-board').addEventListener('click', () => {
     generateWalls();
 });
+
+
+var pieSocket = new PieSocket({
+    clusterId: "s8709.fra1",
+    apiKey: "UJPnzAysgGthXbqJ2qInHjQKrF2wFigeTOzuKhbW",
+    notifySelf: true
+});
+
+const directions = ['up', 'down', 'left', 'right']
+
+pieSocket.subscribe("best-room")
+    .then((channel) => {
+        console.log("Channel is ready");
+        channel.listen("event", ({ player, action }, meta) => {
+            console.log(player, action);
+
+            if (player == '1') {
+                if (action == 'bomb') {
+                    placeBomb(bombermanPosition.x, bombermanPosition.y);
+                }
+                else if (directions.includes(action)) {
+                    moveBomberman(bombermanPosition, action, updateBombermanPosition)
+                }
+            }
+            if (player == '2') {
+                if (action == 'bomb') {
+                    placeBomb(bomberman2Position.x, bomberman2Position.y);
+                }
+                else if (directions.includes(action)) {
+                    moveBomberman(bomberman2Position, action, updateBombermanPosition2)
+                }
+            }
+        });
+    });
