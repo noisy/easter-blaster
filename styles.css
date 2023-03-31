@@ -46,6 +46,19 @@ main {
 
 }
 
+.life-counter .bomberman,
+.life-counter .bomberman2 {
+    width: 64px;
+    height: 64px;
+}
+
+.life-counter .value {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #B22222;
+    margin-left: 10px;
+}
+
 /* Game elements */
 .bomberman {
     background-color: blue;
