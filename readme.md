@@ -20,7 +20,9 @@ Easter Blaster offers a fresh and festive twist on the Bomberman genre, providin
 - Adam Domagalski
 - ChatGPT (GPT4)
 - Ebuka Anyanwu
+- Github Copilot
 - Krzysztof Szumny
 - Marek Pilczuk
 - Marta Musik
+- MidJourney
 - Vasil Bratanov
