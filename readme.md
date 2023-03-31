@@ -15,3 +15,12 @@ Easter Blaster is a fun, engaging, and colorful multiplayer browser game inspire
 - Challenging gameplay: Master the art of bomb placement and timing to overcome obstacles, avoid blasts, and defeat your opponents.
 
 Easter Blaster offers a fresh and festive twist on the Bomberman genre, providing hours of entertainment for players of all ages. The game is perfect for family gatherings, friendly competitions, or simply as a way to unwind and enjoy some Easter-themed fun. Give Easter Blaster a try and see if you can become the ultimate Easter Blaster champion!
+
+## Authors (in alphabetical order)
+- Adam Domagalski
+- ChatGPT (GPT4)
+- Ebuka Anyanwu
+- Krzysztof Szumny
+- Marek Pilczuk
+- Marta Musik
+- Vasil Bratanov
