@@ -68,6 +68,12 @@ function updateBombermanPosition(x, y) {
         return;
     }
 
+    if (isCellInBlast(bombermanPosition.x, bombermanPosition.y)) {
+        bombermanLives--;
+        updateLives();
+        respawnBomberman(1);
+    }
+
     getCell(bombermanPosition.x, bombermanPosition.y).classList.remove('bomberman');
     getCell(x, y).classList.add('bomberman');
     bombermanPosition = { x, y };
@@ -261,6 +267,12 @@ function placeBomb(x, y) {
 function updateBombermanPosition2(x, y) {
     if (getForbiddenPositions().some(pos => pos.x === x && pos.y === y)) {
         return;
+    }
+
+    if (isCellInBlast(bomberman2Position.x, bomberman2Position.y)) {
+        bomberman2Lives--;
+        updateLives();
+        respawnBomberman(2);
     }
 
     getCell(bomberman2Position.x, bomberman2Position.y).classList.remove('bomberman2');
