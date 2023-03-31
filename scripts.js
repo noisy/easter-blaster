@@ -373,6 +373,11 @@ function generateWalls() {
 }
 
 function generateDestructibleItems() {
+    const items = grid.querySelectorAll('.destructible');
+    items.forEach((cell) => {
+        cell.classList.remove('destructible');
+    });
+
     const totalCells = gridSize.rows * gridSize.columns;
     const maxDestructibleItems = Math.floor(totalCells * DESTRUCTIBLE_ITEMS_PERCENTAGE);
 
@@ -391,6 +396,7 @@ function generateDestructibleItems() {
 
 document.getElementById('generate-new-board').addEventListener('click', () => {
     generateWalls();
+    generateDestructibleItems();
 });
 
 
