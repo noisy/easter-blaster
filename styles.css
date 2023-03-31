@@ -1,0 +1,85 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+header {
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Game container */
+.game-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(13, 32px);
+    grid-template-rows: repeat(11, 32px);
+    gap: 2px;
+}
+
+.grid > div {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #ccc;
+}
+
+/* Game elements */
+.bomberman {
+    background-color: blue;
+}
+
+.wall {
+    background-color: #333;
+}
+
+.destructible {
+    background-color: #a52a2a;
+}
+
+.bomb {
+    background-color: #ff69b4;
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.controls button {
+    width: 100px;
+    margin: 5px;
+}
+
+.explosion {
+    background-color: yellow;
+}
+
+.blast {
+    background-color: orange;
+}
+
+.bomberman2 {
+    background-color: red;
+  }
