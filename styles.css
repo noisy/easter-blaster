@@ -37,12 +37,12 @@ main {
     gap: 2px;
 }
 
-.grid > div {
+.grid>div {
     width: 32px;
     height: 32px;
     border: 1px solid #ccc;
-    /* background-image: url("images/grass.png"); */
-    /* background-size: 32px 32px; */
+    background-image: url("images/grass.png");
+    background-size: 32px 32px;
 
 }
 
@@ -50,19 +50,19 @@ main {
 .bomberman {
     background-color: blue;
     background-size: 32px 32px;
-    background-image: url("images/chicken_1.png");
+    background-image: url("images/chicken_1.png") !important;
 }
 
 .bomberman2 {
     background-color: red;
     background-size: 32px 32px;
-    background-image: url("images/chicken_2.png");
+    background-image: url("images/chicken_2.png") !important;
 }
 
 .wall {
     background-color: #333;
     background-size: 32px 32px;
-    background-image: url("images/wall.png");
+    background-image: url("images/wall.png") !important;
 }
 
 .destructible {
@@ -71,6 +71,8 @@ main {
 
 .bomb {
     background-color: #ff69b4;
+    background-size: 32px 32px;
+    background-image: url("images/egg_1.png") !important;
 }
 
 /* Controls */
@@ -93,11 +95,8 @@ main {
     background-color: orange;
 }
 
-
-
 .life-counter {
     font-family: Arial, sans-serif;
     font-size: 14px;
     margin-bottom: 5px;
-  }
-  
+}
