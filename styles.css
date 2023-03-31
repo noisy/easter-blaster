@@ -78,10 +78,6 @@ main {
     background-image: url("images/basket.png") !important;
 }
 
-.destructible {
-    background-color: #a52a2a;
-}
-
 .bomb {
     background-color: #ff69b4;
     background-size: 64px 64px;
@@ -91,7 +87,7 @@ main {
 .destructible {
     background-color: #ff69b4;
     background-size: 64px 64px;
-    background-image: url("images/egg_1.png") !important;
+    background-image: url("images/cake.png") !important;
 }
 
 .bomberman.explosion,
