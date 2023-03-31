@@ -89,30 +89,7 @@ function explodeBomb(x, y) {
         { x: 0, y: -1 },
     ];
 
-    const blastCells = [];
-
-    for (let direction of blastDirections) {
-        for (let i = 1; i <= 4; i++) {
-            const blastX = x + direction.x * i;
-            const blastY = y + direction.y * i;
-
-            // Check if blast is within grid boundaries
-            if (blastX >= 0 && blastX < gridSize.columns && blastY >= 0 && blastY < gridSize.rows) {
-                const blastCell = getCell(blastX, blastY);
-                blastCell.classList.add('blast');
-                blastCells.push(blastCell);
-            }
-        }
-    }
-
-    // // Remove explosion and blast after a short duration
-    // setTimeout(() => {
-    //   bomb.classList.remove('explosion');
-    //   blastCells.forEach((blastCell) => {
-    //     blastCell.classList.remove('blast');
-    //   });
-    // }, 500);
-
+    const blastCells = generateBlastCells(x, y);
 
     // Remove explosion and blast after a short duration
     setTimeout(() => {
@@ -137,6 +114,43 @@ function explodeBomb(x, y) {
 
 }
 
+function generateBlastCells(x, y) {
+    const blastDirections = [
+        { x: 1, y: 0 },
+        { x: -1, y: 0 },
+        { x: 0, y: 1 },
+        { x: 0, y: -1 },
+    ];
+
+    const blastCells = [];
+
+    for (let direction of blastDirections) {
+        for (let i = 1; i <= 4; i++) {
+            const blastX = x + direction.x * i;
+            const blastY = y + direction.y * i;
+
+            // Check if blast is within grid boundaries
+            if (
+                blastX >= 0 &&
+                blastX < gridSize.columns &&
+                blastY >= 0 &&
+                blastY < gridSize.rows
+            ) {
+                const blastCell = getCell(blastX, blastY);
+
+                // Check if the cell has a wall
+                if (blastCell.classList.contains('wall')) {
+                    break;
+                }
+
+                blastCell.classList.add('blast');
+                blastCells.push(blastCell);
+            }
+        }
+    }
+
+    return blastCells;
+}
 
 // Keydown event listener
 window.addEventListener('keydown', (event) => {
@@ -305,7 +319,7 @@ function generateWalls() {
     });
 
     const totalCells = gridSize.rows * gridSize.columns;
-    const maxWalls = Math.floor(totalCells * 0.4);
+    const maxWalls = Math.floor(totalCells * 0.1);
 
     while (walls.length < maxWalls) {
         const x = Math.floor(Math.random() * gridSize.columns);

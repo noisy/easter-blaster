@@ -53,8 +53,16 @@ main {
     background-image: url("images/chicken_1.png");
 }
 
+.bomberman2 {
+    background-color: red;
+    background-size: 32px 32px;
+    background-image: url("images/chicken_2.png");
+}
+
 .wall {
     background-color: #333;
+    background-size: 32px 32px;
+    background-image: url("images/wall.png");
 }
 
 .destructible {
@@ -85,11 +93,7 @@ main {
     background-color: orange;
 }
 
-.bomberman2 {
-    background-color: red;
-    background-size: 32px 32px;
-    background-image: url("images/chicken_2.png");
-}
+
 
 .life-counter {
     font-family: Arial, sans-serif;
