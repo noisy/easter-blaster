@@ -41,11 +41,15 @@ main {
     width: 32px;
     height: 32px;
     border: 1px solid #ccc;
+    /* background-image: url("images/grass.png"); */
+    /* background-size: 32px 32px; */
+
 }
 
 /* Game elements */
 .bomberman {
     background-color: blue;
+    /* background-image: url("images/chicken_1.png"); */
 }
 
 .wall {

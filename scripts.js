@@ -4,9 +4,12 @@ const gridSize = { rows: 11, columns: 13 };
 let bombermanPosition = { x: 1, y: 1 };
 let bomberman2Position = { x: gridSize.columns - 2, y: gridSize.rows - 2 };
 
+
+const NUMBER_OF_LIVES = 2;
 // Life counters
-let bombermanLives = 3;
-let bomberman2Lives = 3;
+let bombermanLives = NUMBER_OF_LIVES;
+let bomberman2Lives = NUMBER_OF_LIVES;
+updateLives()
 
 // Create grid
 function createGrid() {
@@ -216,24 +219,41 @@ function updateBombermanPosition2(x, y) {
 
 // Respawn a Bomberman
 function respawnBomberman(player) {
+
+    const lives = player === 1 ? bombermanLives : bomberman2Lives;
+
+    if (lives <= 0) {
+        endGame(player === 1 ? 2 : 1); // Pass the winning player
+        return;
+    }
+
     const bomberman = player === 1 ? 'bomberman' : 'bomberman2';
     const position = player === 1 ? bombermanPosition : bomberman2Position;
     getCell(position.x, position.y).classList.remove(bomberman);
-  
+
     // Place Bomberman at a random position after a delay
     setTimeout(() => {
-      let forbiddenPositions = []; // Replace with the function returning the list of forbidden positions
-  
-      let x, y;
-      do {
-        x = Math.floor(Math.random() * gridSize.columns);
-        y = Math.floor(Math.random() * gridSize.rows);
-      } while (forbiddenPositions.some(pos => pos.x === x && pos.y === y));
-  
-      if (player === 1) {
-        updateBombermanPosition(x, y);
-      } else {
-        updateBombermanPosition2(x, y);
-      }
+        let forbiddenPositions = []; // Replace with the function returning the list of forbidden positions
+
+        let x, y;
+        do {
+            x = Math.floor(Math.random() * gridSize.columns);
+            y = Math.floor(Math.random() * gridSize.rows);
+        } while (forbiddenPositions.some(pos => pos.x === x && pos.y === y));
+
+        if (player === 1) {
+            updateBombermanPosition(x, y);
+        } else {
+            updateBombermanPosition2(x, y);
+        }
     }, 3000);
-  }
+}
+
+// Display end game message
+function endGame(winner) {
+    const overlay = document.querySelector('.overlay');
+    const message = document.querySelector('.overlay .message');
+
+    message.textContent = `Player ${winner} wins!`;
+    overlay.classList.add('visible');
+}
