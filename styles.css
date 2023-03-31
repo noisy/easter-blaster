@@ -32,37 +32,37 @@ main {
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(13, 32px);
-    grid-template-rows: repeat(11, 32px);
+    grid-template-columns: repeat(13, 64px);
+    grid-template-rows: repeat(11, 64px);
     gap: 2px;
 }
 
 .grid>div {
-    width: 32px;
-    height: 32px;
+    width: 64px;
+    height: 64px;
     border: 1px solid #ccc;
     background-image: url("images/grass.png");
-    background-size: 32px 32px;
+    background-size: 64px 64px;
 
 }
 
 /* Game elements */
 .bomberman {
     background-color: blue;
-    background-size: 32px 32px;
+    background-size: 64px 64px;
     background-image: url("images/chicken_1.png") !important;
 }
 
 .bomberman2 {
     background-color: red;
-    background-size: 32px 32px;
+    background-size: 64px 64px;
     background-image: url("images/chicken_2.png") !important;
 }
 
 .wall {
     background-color: #333;
-    background-size: 32px 32px;
-    background-image: url("images/wall.png") !important;
+    background-size: 64px 64px;
+    background-image: url("images/basket.png") !important;
 }
 
 .destructible {
@@ -71,7 +71,7 @@ main {
 
 .bomb {
     background-color: #ff69b4;
-    background-size: 32px 32px;
+    background-size: 64px 64px;
     background-image: url("images/egg_1.png") !important;
 }
 
@@ -88,11 +88,13 @@ main {
 }
 
 .explosion {
-    background-color: yellow;
+    background-size: 64px 64px;
+    background-image: url("images/fire_2.png") !important;
 }
 
 .blast {
-    background-color: orange;
+    background-size: 64px 64px;
+    background-image: url("images/fire.png") !important;
 }
 
 .life-counter {
