@@ -5,7 +5,7 @@ let bombermanPosition = { x: 1, y: 1 };
 let bomberman2Position = { x: gridSize.columns - 2, y: gridSize.rows - 2 };
 
 
-const NUMBER_OF_LIVES = 2;
+const NUMBER_OF_LIVES = 5;
 const BLAST_DURATION = 500;
 const BOMB_TIMER = 2000;
 const WALLS_PERCENTAGE = 0.1;
@@ -39,9 +39,23 @@ function getCell(x, y) {
 
 // Update life counters in HTML
 function updateLives() {
-    document.getElementById('bomberman-lives').textContent = bombermanLives;
-    document.getElementById('bomberman2-lives').textContent = bomberman2Lives;
-}
+    const livesContainers = [
+      { element: document.getElementById("bomberman-lives"), lives: bombermanLives, class: "bomberman" },
+      { element: document.getElementById("bomberman2-lives"), lives: bomberman2Lives, class: "bomberman2" },
+    ];
+  
+    livesContainers.forEach(({ element, lives, class: className }) => {
+      element.innerHTML = "";
+      for (let i = 0; i < NUMBER_OF_LIVES; i++) {
+        const life = document.createElement("div");
+        life.classList.add(className);
+        if (i >= lives) {
+          life.classList.add("dead");
+        }
+        element.appendChild(life);
+      }
+    });
+  }
 
 // Check if a cell is in the blast area
 function isCellInBlast(x, y) {

@@ -90,6 +90,10 @@ main {
     background-image: url("images/cake.png") !important;
 }
 
+.dead {
+    opacity: 0.5;
+}
+
 .bomberman.explosion,
 .bomberman.blast,
 .bomberman2.explosion,
