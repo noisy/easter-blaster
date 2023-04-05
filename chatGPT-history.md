@@ -463,7 +463,7 @@ function explodeBomb(x, y) {
       const blastY = y + direction.y * i;
 
       // Check if blast is within grid boundaries
-      if (blastX >= 0 &amp;&amp; blastX < gridSize.columns &amp;&amp; blastY >= 0 &amp;&amp; blastY < gridSize.rows) {
+      if (blastX >= 0 && blastX < gridSize.columns && blastY >= 0 && blastY < gridSize.rows) {
         const blastCell = getCell(blastX, blastY);
         blastCell.classList.add('blast');
         blastCells.push(blastCell);
@@ -669,7 +669,7 @@ function respawnBomberman(player) {
     do {
       x = Math.floor(Math.random() * gridSize.columns);
       y = Math.floor(Math.random() * gridSize.rows);
-    } while (forbiddenPositions.some(pos => pos.x === x &amp;&amp; pos.y === y));
+    } while (forbiddenPositions.some(pos => pos.x === x && pos.y === y));
 
     if (player === 1) {
       updateBombermanPosition(x, y);
@@ -940,7 +940,7 @@ function generateWalls() {
     const y = Math.floor(Math.random() * gridSize.rows);
 
     // Check if the cell is not already in the walls array
-    if (!walls.some((wall) => wall.x === x &amp;&amp; wall.y === y)) {
+    if (!walls.some((wall) => wall.x === x && wall.y === y)) {
       walls.push({ x, y });
     }
   }
@@ -979,7 +979,7 @@ function generateWalls() {
     const y = Math.floor(Math.random() * gridSize.rows);
 
     // Check if the cell is not already in the walls array
-    if (!walls.some((wall) => wall.x === x &amp;&amp; wall.y === y)) {
+    if (!walls.some((wall) => wall.x === x && wall.y === y)) {
       walls.push({ x, y });
 
       // Add .wall class to the cell
@@ -1040,7 +1040,7 @@ function updateBombermanPosition(x, y) {
   const targetCell = getCell(x, y);
 
   // Check if the new position is forbidden
-  if (forbiddenPositions.some(pos => pos.x === x &amp;&amp; pos.y === y)) {
+  if (forbiddenPositions.some(pos => pos.x === x && pos.y === y)) {
     return;
   }
 
@@ -1075,14 +1075,14 @@ function initBombermans() {
   do {
     x1 = Math.floor(Math.random() * gridSize.columns);
     y1 = Math.floor(Math.random() * gridSize.rows);
-  } while (forbiddenPositions.some(pos => pos.x === x1 &amp;&amp; pos.y === y1));
+  } while (forbiddenPositions.some(pos => pos.x === x1 && pos.y === y1));
 
   // Find a valid random position for Bomberman 2
   let x2, y2;
   do {
     x2 = Math.floor(Math.random() * gridSize.columns);
     y2 = Math.floor(Math.random() * gridSize.rows);
-  } while (forbiddenPositions.some(pos => pos.x === x2 &amp;&amp; pos.y === y2) || (x1 === x2 &amp;&amp; y1 === y2));
+  } while (forbiddenPositions.some(pos => pos.x === x2 && pos.y === y2) || (x1 === x2 && y1 === y2));
 
   // Initialize Bombermans
   updateBombermanPosition(x1, y1);
@@ -1118,7 +1118,7 @@ function findRandomPosition(forbiddenPositions) {
   do {
     x = Math.floor(Math.random() * gridSize.columns);
     y = Math.floor(Math.random() * gridSize.rows);
-  } while (forbiddenPositions.some(pos => pos.x === x &amp;&amp; pos.y === y));
+  } while (forbiddenPositions.some(pos => pos.x === x && pos.y === y));
 
   return { x, y };
 }
@@ -1158,7 +1158,7 @@ In this updated code, the `findRandomPosition()` function is used to find valid 
             const blastY = y + direction.y * i;
 
             // Check if blast is within grid boundaries
-            if (blastX >= 0 &amp;&amp; blastX < gridSize.columns &amp;&amp; blastY >= 0 &amp;&amp; blastY < gridSize.rows) {
+            if (blastX >= 0 && blastX < gridSize.columns && blastY >= 0 && blastY < gridSize.rows) {
                 const blastCell = getCell(blastX, blastY);
                 blastCell.classList.add('blast');
                 blastCells.push(blastCell);
@@ -1191,9 +1191,9 @@ function generateBlastCells(x, y) {
 
       // Check if blast is within grid boundaries
       if (
-        blastX >= 0 &amp;&amp;
-        blastX < gridSize.columns &amp;&amp;
-        blastY >= 0 &amp;&amp;
+        blastX >= 0 &&
+        blastX < gridSize.columns &&
+        blastY >= 0 &&
         blastY < gridSize.rows
       ) {
         const blastCell = getCell(blastX, blastY);
@@ -1351,7 +1351,7 @@ function generateDestructibleItems() {
     const y = Math.floor(Math.random() * gridSize.rows);
 
     const cell = getCell(x, y);
-    if (!cell.classList.contains('wall') &amp;&amp; !cell.classList.contains('destructible')) {
+    if (!cell.classList.contains('wall') && !cell.classList.contains('destructible')) {
       cell.classList.add('destructible');
       placedItems++;
     }
