@@ -18,11 +18,11 @@ Easter Blaster offers a fresh and festive twist on the Bomberman genre, providin
 
 ## Authors (in alphabetical order)
 - Adam Domagalski
-- ChatGPT (GPT4)
+- ChatGPT (GPT4) 🤖
 - Ebuka Anyanwu
-- Github Copilot
+- Github Copilot 🤖
 - Krzysztof Szumny
 - Marek Pilczuk
 - Marta Musik
-- MidJourney
+- MidJourney 🤖
 - Vasil Bratanov

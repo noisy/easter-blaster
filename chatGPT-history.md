@@ -1020,7 +1020,7 @@ Now, when the "Generate New Board" button is clicked, the `generateWalls()` func
 
 **Krzysztof Szumny**: update this function:
 
-```
+```javascript
 function updateBombermanPosition(x, y) {
     getCell(bombermanPosition.x, bombermanPosition.y).classList.remove('bomberman');
     getCell(x, y).classList.add('bomberman');
